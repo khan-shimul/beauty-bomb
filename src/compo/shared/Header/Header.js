@@ -13,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../../../images/logo/bbs.png';
 import { makeStyles } from '@mui/styles';
+import { Link, NavLink } from 'react-router-dom';
 
-const pages = ['Home', 'About Us', 'Our Service', 'Team', 'Contact'];
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const useStyles = makeStyles({
@@ -26,6 +27,18 @@ const useStyles = makeStyles({
         height: '40px',
         width: '40px',
         marginRight: '20px'
+    },
+    menu: {
+        color: '#423033 !important',
+        // display: 'block',
+        fontFamily: 'Lato',
+        transition: '0.3s !important',
+        '&:hover': {
+            color: '#F34A4A !important',
+        }
+    },
+    activePage: {
+        color: '#F34A4A !important'
     }
 });
 
@@ -49,6 +62,7 @@ const Header = () => {
     };
 
     const classes = useStyles();
+
 
     return (
         <AppBar elevation={0} position="static" className={classes.root}>
@@ -75,6 +89,7 @@ const Header = () => {
                         >
                             <MenuIcon sx={{ color: '#423033' }} />
                         </IconButton>
+
                         {/* Mobile Menu */}
                         <Menu
                             id="menu-appbar"
@@ -94,33 +109,53 @@ const Header = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" sx={{ color: '#423033', fontFamily: 'Lato' }}>{page}</Typography>
-                                </MenuItem>
-                            ))}
+                            <Box onClick={handleCloseNavMenu}>
+                                <Link to="/home">
+                                    <MenuItem className={classes.menu} >Home</MenuItem>
+                                </Link>
+                                <Link to="/about">
+                                    <MenuItem className={classes.menu}>About Us</MenuItem>
+                                </Link>
+                                <Link to="/service">
+                                    <MenuItem className={classes.menu}>Our Service</MenuItem>
+                                </Link>
+                                <Link to="/team">
+                                    <MenuItem className={classes.menu}>Team</MenuItem>
+                                </Link>
+                                <Link to="/contact">
+                                    <MenuItem className={classes.menu}>Contact</MenuItem>
+                                </Link>
+                            </Box>
                         </Menu>
                     </Box>
-                    {/* <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', color: '#423033' } }}
-                    >
-                        BBS
-                    </Typography> */}
 
                     {/* Desktop Menu */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#423033', display: 'block', fontFamily: 'Lato' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+                        <NavLink to="/home"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>Home</Button>
+                        </NavLink>
+                        <NavLink to="/about"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>About Us</Button>
+                        </NavLink>
+                        <NavLink to="/service"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>Our Service</Button>
+                        </NavLink>
+                        <NavLink to="/team"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>Team</Button>
+                        </NavLink>
+                        <NavLink to="/contact"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>Contact</Button>
+                        </NavLink>
                     </Box>
 
                     <Box sx={{ flexGrow: 0, ml: 2 }}>
