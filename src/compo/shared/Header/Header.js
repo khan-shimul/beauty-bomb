@@ -11,9 +11,23 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import logo from '../../../images/logo/bbs.png';
+import { makeStyles } from '@mui/styles';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'About Us', 'Our Service', 'Team', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const useStyles = makeStyles({
+    root: {
+        background: '#FAF5F7 !important',
+        padding: '10px'
+    },
+    logo: {
+        height: '40px',
+        width: '40px',
+        marginRight: '20px'
+    }
+});
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,17 +48,20 @@ const Header = () => {
         setAnchorElUser(null);
     };
 
+    const classes = useStyles();
+
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
+        <AppBar elevation={0} position="static" className={classes.root}>
+            <Container maxWidth="lg">
                 <Toolbar disableGutters>
+                    <img className={classes.logo} src={logo} alt="logo" />
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, color: '#423033', fontFamily: 'Lato' }}
                     >
-                        LOGO
+                        BBS
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -56,8 +73,9 @@ const Header = () => {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: '#423033' }} />
                         </IconButton>
+                        {/* Mobile Menu */}
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -78,32 +96,34 @@ const Header = () => {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Typography textAlign="center" sx={{ color: '#423033', fontFamily: 'Lato' }}>{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <Typography
+                    {/* <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', color: '#423033' } }}
                     >
-                        LOGO
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        BBS
+                    </Typography> */}
+
+                    {/* Desktop Menu */}
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: '#423033', display: 'block', fontFamily: 'Lato' }}
                             >
                                 {page}
                             </Button>
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ flexGrow: 0, ml: 2 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
