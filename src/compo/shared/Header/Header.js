@@ -32,13 +32,16 @@ const useStyles = makeStyles({
         color: '#423033 !important',
         // display: 'block',
         fontFamily: 'Lato',
+        textTransform: 'none !important',
+        fontSize: '16px !important',
         transition: '0.3s !important',
         '&:hover': {
             color: '#F34A4A !important',
         }
     },
     activePage: {
-        color: '#F34A4A !important'
+        color: '#F34A4A !important',
+        borderBottom: '1.5px solid #F44A4A',
     }
 });
 
@@ -130,9 +133,9 @@ const Header = () => {
                     </Box>
 
                     {/* Desktop Menu */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
+                    <Box sx={{ fontFamily: 'Lato', flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
                         <NavLink to="/home"
-                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                            className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                         >
                             <Button className={classes.menu}>Home</Button>
                         </NavLink>
