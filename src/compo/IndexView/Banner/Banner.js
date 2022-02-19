@@ -46,7 +46,11 @@ const Banner = () => {
                                 src={freshGreen} alt="" />
                         </Box>
 
-                        <Typography variant="h2" sx={{ fontFamily: 'Prata', fontWeight: 500, color: '#423033', textAlign: { xs: 'center', md: 'left' }, fontSize: { xs: '3rem', md: '3.7rem' } }}>
+                        <Typography
+                            data-aos="fade-up"
+                            data-aos-duration="1000"
+                            variant="h2"
+                            sx={{ fontFamily: 'Prata', fontWeight: 500, color: '#423033', textAlign: { xs: 'center', md: 'left' }, fontSize: { xs: '3rem', md: '3.7rem' } }}>
                             Brighten Your Skin & Make Yourself More Beautiful
                         </Typography>
                         <Typography component="div" variant="body2" sx={{ width: { md: '65%' }, color: '#848484', py: 3.5, textAlign: { xs: 'center', md: 'left' } }}>

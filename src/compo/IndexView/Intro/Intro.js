@@ -33,6 +33,8 @@ const Intro = () => {
             <Box component="div" sx={{ my: 8 }}>
                 <Box sx={{ textAlign: 'center' }}>
                     <Typography
+                        data-aos="fade-up"
+                        data-aos-duration="800"
                         variant="h3"
                         sx={{ fontSize: '3rem', color: '#423033', fontFamily: 'Prata' }}>Welcome to Beauty Bomb Salon</Typography>
                     <Typography
@@ -52,6 +54,8 @@ const Intro = () => {
                                 alt="" />
                             {/* Story Part */}
                             <Box
+                                data-aos="fade-up"
+                                data-aos-duration="800"
                                 position="relative"
                                 top="-30px"
                                 sx={{ width: '90%', mx: 'auto', textAlign: 'center', background: '#FAF5F7', p: 5 }}>
@@ -81,6 +85,8 @@ const Intro = () => {
                                 alt="" />
                             {/* Service Part */}
                             <Box
+                                data-aos="fade-up"
+                                data-aos-duration="800"
                                 position="relative"
                                 top="-30px"
                                 sx={{ width: '90%', mx: 'auto', textAlign: 'center', background: '#FAF5F7', p: 5 }}>

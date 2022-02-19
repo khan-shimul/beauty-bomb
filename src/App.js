@@ -12,6 +12,9 @@ import About from './pages/About/About';
 import Service from './pages/Service/Service';
 import Team from './pages/Team/Team';
 import Contact from './pages/Contact/Contact';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
 
 function App() {
   return (
