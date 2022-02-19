@@ -14,23 +14,28 @@ const Banner = () => {
             borderRadius: '0px !important',
             color: '#fff !important',
             fontFamily: 'Lato',
-            transition: '0.7s',
+            transition: 'transform 250ms !important',
             '&:hover': {
-                background: '#E54646 !important'
+                background: '#E54646 !important',
+                transform: 'translateY(-10px) !important'
             }
         },
         secondaryBtn: {
             textTransform: 'none !important',
             background: 'transparent !important',
-            border: '1px solid #F44A4A !important',
             borderRadius: '0px !important',
             color: '#F44A4A !important',
-            fontFamily: 'Lato'
+            fontFamily: 'Lato',
+            transition: 'transform 250ms !important',
+            '&:hover': {
+                border: '1px solid #F44A4A !important',
+                transform: 'translateY(-10px) !important'
+            }
         }
     });
     const classes = useStyles();
     return (
-        <Box component="section" sx={{ background: '#F6ECE5', marginTop: 3, pb: 1 }}>
+        <Box component="section" sx={{ background: '#F6ECE5', marginTop: 3, pb: 2 }}>
             <Container>
                 <Grid container spacing={3} sx={{ alignItems: 'center' }}>
                     <Grid item xs={12} sm={12} md={6}>
@@ -44,7 +49,7 @@ const Banner = () => {
                         <Typography variant="h2" sx={{ fontFamily: 'Prata', fontWeight: 500, color: '#423033', textAlign: { xs: 'center', md: 'left' }, fontSize: { xs: '3rem', md: '3.7rem' } }}>
                             Brighten Your Skin & Make Yourself More Beautiful
                         </Typography>
-                        <Typography component="div" variant="body2" sx={{ width: { md: '65%' }, color: '#848484', pb: 3, pt: 1, textAlign: { xs: 'center', md: 'left' } }}>
+                        <Typography component="div" variant="body2" sx={{ width: { md: '65%' }, color: '#848484', py: 3.5, textAlign: { xs: 'center', md: 'left' } }}>
                             Taking care of your overall health is the first step towards achieving naturally glowing skin. You will not need any make-up to look gorgeous.
                         </Typography>
                         <Button
@@ -58,7 +63,7 @@ const Banner = () => {
                             sx={{ width: { xs: '100%', md: '35%' }, mb: { xs: 2, md: 0 }, px: 4.5, py: 1.5, fontWeight: 600 }}
                         >Watch Video</Button>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} sx={{ marginBottom: -1.5 }}>
+                    <Grid item xs={12} sm={12} md={6} sx={{ marginBottom: -2.5 }}>
                         <img
                             width='100%'
                             height='100%'
