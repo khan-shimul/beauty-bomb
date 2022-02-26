@@ -21,7 +21,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const useStyles = makeStyles({
     root: {
         background: '#FAF5F7 !important',
-        padding: '15px',
+        padding: '10px',
     },
     logo: {
         height: '40px',
@@ -68,7 +68,7 @@ const Header = () => {
 
 
     return (
-        <AppBar component="div" elevation={0} position="static" className={classes.root}>
+        <AppBar component="div" elevation={0} position="sticky" className={classes.root}>
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
                     <img className={classes.logo} src={logo} alt="logo" />
