@@ -1,6 +1,6 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 // Custom Styles
@@ -23,8 +23,22 @@ const useStyles = makeStyles({
 });
 
 const SpaServices = () => {
-    // const treatMents = ['Skin', 'Message', 'Body', 'Aroma'];
-    // treatMents.map((index, treatMent) => console.log(index[treatMent], treatMent))
+    const [spaCategory, setSpaCategory] = useState('');
+    const [services, setServices] = useState([]);
+
+    // Handle Spa Services Category
+    const handleSpaCategory = (category) => {
+        setSpaCategory(category);
+    };
+
+    // Display Service
+    useEffect(() => {
+        fetch(`https://jsonplaceholder.typicode.com/posts`)
+            .then(res => res.json())
+            .then(data => setServices(data));
+    }, []);
+
+
     const classes = useStyles();
     return (
         <Box component="section">
@@ -46,22 +60,34 @@ const SpaServices = () => {
                     <NavLink to="/skin"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                     >
-                        <Button className={classes.navItem}>Skin</Button>
+                        <Button
+                            className={classes.navItem}
+                            onClick={() => handleSpaCategory('skin')}
+                        >Skin</Button>
                     </NavLink>
                     <NavLink to="/message"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                     >
-                        <Button className={classes.navItem}>Message</Button>
+                        <Button
+                            className={classes.navItem}
+                            onClick={() => handleSpaCategory('message')}
+                        >Message</Button>
                     </NavLink>
                     <NavLink to="/body"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                     >
-                        <Button className={classes.navItem}>Body</Button>
+                        <Button
+                            className={classes.navItem}
+                            onClick={() => handleSpaCategory('body')}
+                        >Body</Button>
                     </NavLink>
                     <NavLink to="/aroma"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                     >
-                        <Button className={classes.navItem}>Aroma</Button>
+                        <Button
+                            className={classes.navItem}
+                            onClick={() => handleSpaCategory('aroma')}
+                        >Aroma</Button>
                     </NavLink>
                 </Box>
                 <Outlet />

@@ -128,6 +128,9 @@ const Header = () => {
                                 <Link to="/contact">
                                     <MenuItem className={classes.menu}>Contact</MenuItem>
                                 </Link>
+                                <Link to="/login">
+                                    <MenuItem className={classes.menu}>Login</MenuItem>
+                                </Link>
                             </Box>
                         </Menu>
                     </Box>
@@ -158,6 +161,11 @@ const Header = () => {
                             className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
                         >
                             <Button className={classes.menu}>Contact</Button>
+                        </NavLink>
+                        <NavLink to="/login"
+                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                        >
+                            <Button className={classes.menu}>Login</Button>
                         </NavLink>
                     </Box>
 

@@ -12,7 +12,7 @@ export const useStyles = makeStyles({
         color: '#fff !important',
         fontFamily: 'Lato !important',
         fontWeight: '600 !important',
-        padding: '7px 25px !important',
+        // padding: '7px 25px !important',
         transition: '0.3s !important',
         '&:hover': {
             background: '#D83C3A !important',
@@ -71,6 +71,7 @@ const Intro = () => {
                                 </Typography>
                                 <Button
                                     contained
+                                    sx={{ p: '7px 25px' }}
                                     className={classes.btnRegular}
                                 >
                                     Discover
@@ -102,6 +103,7 @@ const Intro = () => {
                                 </Typography>
                                 <Button
                                     contained
+                                    sx={{ p: '7px 25px' }}
                                     className={classes.btnRegular}
                                 >
                                     Discover
