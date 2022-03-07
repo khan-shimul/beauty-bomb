@@ -13,6 +13,7 @@ import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login/Login';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Register from './pages/Login/Register/Register';
 AOS.init();
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
