@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import logo from '../../../images/logo/bbs.png';
 import { makeStyles } from '@mui/styles';
 import { Link, NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth/useAuth';
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -65,6 +66,8 @@ const Header = () => {
     };
 
     const classes = useStyles();
+
+    const { user } = useAuth();
 
 
     return (
@@ -162,11 +165,16 @@ const Header = () => {
                         >
                             <Button className={classes.menu}>Contact</Button>
                         </NavLink>
-                        <NavLink to="/login"
-                            className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
-                        >
-                            <Button className={classes.menu}>Login</Button>
-                        </NavLink>
+                        {
+                            user?.email ?
+                                <Button className={classes.menu}>Logout</Button>
+                                :
+                                <NavLink to="/login"
+                                    className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}
+                                >
+                                    <Button className={classes.menu}>Login</Button>
+                                </NavLink>
+                        }
                     </Box>
 
                     <Box sx={{ flexGrow: 0, ml: 2 }}>
