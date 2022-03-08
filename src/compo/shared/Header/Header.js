@@ -67,7 +67,7 @@ const Header = () => {
 
     const classes = useStyles();
 
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
 
     return (
@@ -131,9 +131,14 @@ const Header = () => {
                                 <Link to="/contact">
                                     <MenuItem className={classes.menu}>Contact</MenuItem>
                                 </Link>
-                                <Link to="/login">
-                                    <MenuItem className={classes.menu}>Login</MenuItem>
-                                </Link>
+                                {
+                                    user?.email ?
+                                        <MenuItem onClick={logout} className={classes.menu}>Logout</MenuItem>
+                                        :
+                                        <Link to="/login">
+                                            <MenuItem className={classes.menu}>Login</MenuItem>
+                                        </Link>
+                                }
                             </Box>
                         </Menu>
                     </Box>
@@ -167,7 +172,7 @@ const Header = () => {
                         </NavLink>
                         {
                             user?.email ?
-                                <Button className={classes.menu}>Logout</Button>
+                                <Button onClick={logout} className={classes.menu}>Logout</Button>
                                 :
                                 <NavLink to="/login"
                                     className={(navInfo) => (navInfo.isActive ? classes.activePage : "")}

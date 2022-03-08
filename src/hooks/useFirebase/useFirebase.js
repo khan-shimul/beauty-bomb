@@ -7,25 +7,31 @@ initializeFirebase();
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
     const auth = getAuth();
 
     // Register New User
     const registerNewUser = (email, pass) => {
+        setLoading(true);
         createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                // ...
+                console.log(user)
+                setUser(user);
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorMessage)
                 // ..
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     // Login existing user
     const loginUser = (email, pass) => {
+        setLoading(true);
         signInWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
                 // Signed in 
@@ -35,7 +41,8 @@ const useFirebase = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-            });
+            })
+            .finally(() => setLoading(false));
     }
 
     // Observer user State change or not
@@ -46,24 +53,28 @@ const useFirebase = () => {
             } else {
                 setUser({});
             }
+            setLoading(false);
         });
         return () => unSubscribe;
     }, [])
 
     // Logout user
     const logout = () => {
+        setLoading(true);
         signOut(auth).then(() => {
             // Sign-out successful.
         }).catch((error) => {
             // An error happened.
-        });
+        })
+            .finally(() => setLoading(false));
     };
 
     return {
         user,
+        loading,
         registerNewUser,
         loginUser,
-        logout
+        logout,
 
     };
 

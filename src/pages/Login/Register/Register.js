@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Button, Container, Grid, Typography, TextField } from '@mui/material';
+import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Snackbar, Alert } from '@mui/material';
 import login from '../../../images/login/login2.png';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -9,9 +9,12 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import { useStyles } from '../../../compo/IndexView/Intro/Intro';
 import { useStyles2 } from '../Login/Login';
 import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth/useAuth';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
+    const { user, registerNewUser, loading } = useAuth();
+
     // Handle Login Info
     const handleOnChange = e => {
         const field = e.target.name;
@@ -22,7 +25,7 @@ const Register = () => {
 
     };
     // Handle Login Form
-    const handleLogin = e => {
+    const handleRegister = e => {
         e.preventDefault();
         if (loginData.password !== loginData.password2) {
             Swal.fire({
@@ -31,7 +34,8 @@ const Register = () => {
                 text: 'Your Password Did Not Match!'
             });
             return
-        }
+        };
+        registerNewUser(loginData.email, loginData.password);
     };
 
     const classes = useStyles();
@@ -40,21 +44,21 @@ const Register = () => {
         <Box>
             <Container>
                 <Box sx={{ my: 10 }}>
-                    <Grid container spacing={{ xs: 2, md: 8 }}>
+                    <Grid container spacing={{ xs: 2, md: 8 }} sx={{ alignItems: 'center' }}>
                         <Grid item xs={12} sm={12} md={6}>
                             <Box>
                                 <img style={{ width: '100%' }} src={login} alt="" />
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6}>
-                            <Box>
+                            {!loading && <Box >
                                 <Typography variant="h5" sx={{ my: 3, fontWeight: 600, fontFamily: 'Lato' }}>Register</Typography>
                                 {/* Login Form */}
-                                <form onSubmit={handleLogin}>
+                                <form onSubmit={handleRegister}>
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        required
+                                        // required
                                         name="name"
                                         id="outlined-basic"
                                         label="Your Name"
@@ -64,7 +68,7 @@ const Register = () => {
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        required
+                                        // required
                                         name="email"
                                         type="email"
                                         id="outlined-basic"
@@ -75,7 +79,7 @@ const Register = () => {
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        required
+                                        // required
                                         name="password"
                                         id="outlined-basic"
                                         label="Password"
@@ -86,7 +90,7 @@ const Register = () => {
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        required
+                                        // required
                                         name="password2"
                                         id="outlined-basic"
                                         label="Confirm Password"
@@ -123,7 +127,13 @@ const Register = () => {
                                         startIcon={<InstagramIcon />}
                                     ></Button>
                                 </Box>
-                            </Box>
+                            </Box>}
+                            {loading && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress sx={{ color: '#EA4544' }} />
+                            </Box>}
+                            {user.email && <Alert severity="success" sx={{ width: '100%' }}>
+                                This is a success message!
+                            </Alert>}
                         </Grid>
                     </Grid>
                 </Box>
