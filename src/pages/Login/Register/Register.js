@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Snackbar, Alert } from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Box, Button, Container, Grid, Typography, TextField, CircularProgress } from '@mui/material';
 import login from '../../../images/login/login2.png';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -13,7 +13,10 @@ import useAuth from '../../../hooks/useAuth/useAuth';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, registerNewUser, loading } = useAuth();
+    const { user, registerNewUser, loading, authError } = useAuth();
+    const navigate = useNavigate();
+    const classes = useStyles();
+    const classes2 = useStyles2();
 
     // Handle Login Info
     const handleOnChange = e => {
@@ -27,6 +30,7 @@ const Register = () => {
     // Handle Login Form
     const handleRegister = e => {
         e.preventDefault();
+        // Pass doesn't match
         if (loginData.password !== loginData.password2) {
             Swal.fire({
                 icon: 'error',
@@ -35,11 +39,27 @@ const Register = () => {
             });
             return
         };
-        registerNewUser(loginData.email, loginData.password);
+        // Call / register new user func
+        registerNewUser(loginData.email, loginData.password, navigate);
+    };
+    // Display Register Auth Error
+    if (authError) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${authError}`
+        });
+        return
+    };
+    // Display Successfully Register Message
+    if (user.email) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Congrats',
+            text: `You have successfully registered!`
+        })
     };
 
-    const classes = useStyles();
-    const classes2 = useStyles2();
     return (
         <Box>
             <Container>
@@ -131,9 +151,6 @@ const Register = () => {
                             {loading && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <CircularProgress sx={{ color: '#EA4544' }} />
                             </Box>}
-                            {user.email && <Alert severity="success" sx={{ width: '100%' }}>
-                                This is a success message!
-                            </Alert>}
                         </Grid>
                     </Grid>
                 </Box>

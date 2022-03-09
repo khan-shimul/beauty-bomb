@@ -15,6 +15,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Register from './pages/Login/Register/Register';
 import AuthProvider from './context/AuthProvider/AuthProvider';
+import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 AOS.init();
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
               <Route path='/home' element={<p>skin infof</p>}></Route>
             </Route>
             <Route path="/about" element={<About />} />
-            <Route path="/service" element={<Service />} />
+            <Route path="/service" element={<PrivateRoute><Service /></PrivateRoute>} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />

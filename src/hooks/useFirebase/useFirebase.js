@@ -7,40 +7,38 @@ initializeFirebase();
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [authError, setAuthError] = useState('');
     const [loading, setLoading] = useState(true);
     const auth = getAuth();
 
     // Register New User
-    const registerNewUser = (email, pass) => {
+    const registerNewUser = (email, pass, navigate) => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-                console.log(user)
-                setUser(user);
+                // setUser(user);
+                setAuthError('');
+                navigate('/');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
-                // ..
+                setAuthError(error.message);
             })
             .finally(() => setLoading(false));
     };
 
     // Login existing user
-    const loginUser = (email, pass) => {
+    const loginUser = (email, pass, location, navigate) => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
+                setUser(userCredential.user)
+                const destination = location?.state?.from || '/';
+                navigate(destination);
+                setAuthError('');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                setAuthError(error.message);
             })
             .finally(() => setLoading(false));
     }
@@ -72,10 +70,10 @@ const useFirebase = () => {
     return {
         user,
         loading,
+        authError,
         registerNewUser,
         loginUser,
         logout,
-
     };
 
 }

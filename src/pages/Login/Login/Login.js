@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Box, Button, Container, Grid, Typography, TextField } from '@mui/material';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Alert } from '@mui/material';
 import login from '../../../images/login/login2.png';
 import { useStyles } from '../../../compo/IndexView/Intro/Intro';
 import { makeStyles } from '@mui/styles';
@@ -8,6 +8,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import useAuth from '../../../hooks/useAuth/useAuth';
+import Swal from 'sweetalert2';
 
 
 export const useStyles2 = makeStyles({
@@ -34,6 +36,10 @@ export const useStyles2 = makeStyles({
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { user, loading, loginUser, authError } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     // Handle Login Info
     const handleOnChange = e => {
         const field = e.target.name;
@@ -46,6 +52,17 @@ const Login = () => {
     // Handle Login Form
     const handleLogin = e => {
         e.preventDefault();
+        // Call/register existing user func
+        loginUser(loginData.email, loginData.password, location, navigate);
+        // Display Auth Error Message
+        if (authError) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${authError}`
+            });
+            return
+        };
     };
 
     const classes = useStyles();
@@ -61,7 +78,7 @@ const Login = () => {
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6}>
-                            <Box>
+                            {!loading && <Box>
                                 <Typography variant="h5" sx={{ my: 3, fontWeight: 600, fontFamily: 'Lato' }}>Login</Typography>
                                 {/* Login Form */}
                                 <form onSubmit={handleLogin}>
@@ -116,7 +133,14 @@ const Login = () => {
                                         startIcon={<InstagramIcon />}
                                     ></Button>
                                 </Box>
-                            </Box>
+                            </Box>}
+                            {loading && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress sx={{ color: '#EA4544' }} />
+                            </Box>}
+                            {/* Display Successfully Register Message */}
+                            {user.email && <Alert severity="success" sx={{ width: '100%' }}>
+                                Congrats!! You have successfully Login!
+                            </Alert>}
                         </Grid>
                     </Grid>
                 </Box>
