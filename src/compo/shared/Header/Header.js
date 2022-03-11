@@ -185,7 +185,10 @@ const Header = () => {
                     <Box sx={{ flexGrow: 0, ml: 2 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                {/* If photo exist */}
+                                {user?.photoUrl && <Avatar alt="User Profile" src={user.photoUrl}></Avatar>}
+                                {/* If photo doesn't exist */}
+                                {!user?.photoUrl && <Avatar alt="User Profile">{user?.displayName?.slice(0, 1)}</Avatar>}
                             </IconButton>
                         </Tooltip>
                         <Menu

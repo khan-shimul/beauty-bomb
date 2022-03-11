@@ -42,7 +42,7 @@ const Register = () => {
         };
 
         // Call / register new user func
-        registerNewUser(data.email, data.password, navigate);
+        registerNewUser(data.email, data.password, data.name, navigate);
     };
 
     // Display Successfully Register Message

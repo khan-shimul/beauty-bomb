@@ -37,7 +37,7 @@ export const useStyles2 = makeStyles({
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    const { user, loading, loginUser, authError } = useAuth();
+    const { user, loading, loginUser, loginWithGoogle, authError } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -46,6 +46,11 @@ const Login = () => {
         // Call/register existing user func
         loginUser(data.email, data.password, location, navigate);
     };
+
+    // Handle login with google
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle(location, navigate);
+    }
 
     // Display Successfully Login Message
     if (user.email) {
@@ -107,6 +112,7 @@ const Login = () => {
                                 {/* Social Media */}
                                 <Box sx={{ width: { xs: 1, md: '80%' }, textAlign: 'center', mt: { xs: 0, md: 3 } }}>
                                     <Button
+                                        onClick={handleLoginWithGoogle}
                                         sx={{ color: '#F44A4A' }}
                                         startIcon={<GoogleIcon />}
                                     ></Button>
