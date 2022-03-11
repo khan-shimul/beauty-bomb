@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Button, Container, Grid, Typography, TextField, CircularProgress } from '@mui/material';
+import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Alert } from '@mui/material';
 import login from '../../../images/login/login2.png';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -42,15 +42,7 @@ const Register = () => {
         // Call / register new user func
         registerNewUser(loginData.email, loginData.password, navigate);
     };
-    // Display Register Auth Error
-    if (authError) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `${authError}`
-        });
-        return
-    };
+
     // Display Successfully Register Message
     if (user.email) {
         Swal.fire({
@@ -118,6 +110,8 @@ const Register = () => {
                                         type="password"
                                         onChange={handleOnChange}
                                     />
+                                    {/* Display Register Error Message */}
+                                    {authError && <Alert severity="error" sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}>{authError}</Alert>}
                                     <Button
                                         sx={{ width: { xs: 1, md: '80%' }, py: 1.5, mb: 2 }}
                                         className={classes.btnRegular}

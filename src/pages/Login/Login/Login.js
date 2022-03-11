@@ -54,15 +54,15 @@ const Login = () => {
         e.preventDefault();
         // Call/register existing user func
         loginUser(loginData.email, loginData.password, location, navigate);
-        // Display Auth Error Message
-        if (authError) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${authError}`
-            });
-            return
-        };
+    };
+
+    // Display Successfully Login Message
+    if (user.email) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Congrats',
+            text: `You have successfully Login!`
+        });
     };
 
     const classes = useStyles();
@@ -104,6 +104,8 @@ const Login = () => {
                                         type="password"
                                         onChange={handleOnChange}
                                     />
+                                    {/* Display Login Error Message */}
+                                    {authError && <Alert severity="error" sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}>{authError}</Alert>}
                                     <Button
                                         sx={{ width: { xs: 1, md: '80%' }, py: 1.5, mb: 2 }}
                                         className={classes.btnRegular}
@@ -137,10 +139,7 @@ const Login = () => {
                             {loading && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <CircularProgress sx={{ color: '#EA4544' }} />
                             </Box>}
-                            {/* Display Successfully Register Message */}
-                            {user.email && <Alert severity="success" sx={{ width: '100%' }}>
-                                Congrats!! You have successfully Login!
-                            </Alert>}
+
                         </Grid>
                     </Grid>
                 </Box>
