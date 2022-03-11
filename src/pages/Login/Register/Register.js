@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Alert } from '@mui/material';
 import login from '../../../images/login/login2.png';
@@ -10,28 +10,29 @@ import { useStyles } from '../../../compo/IndexView/Intro/Intro';
 import { useStyles2 } from '../Login/Login';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth/useAuth';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
-    const [loginData, setLoginData] = useState({});
+    const { register, handleSubmit } = useForm();
     const { user, registerNewUser, loading, authError } = useAuth();
     const navigate = useNavigate();
     const classes = useStyles();
     const classes2 = useStyles2();
 
-    // Handle Login Info
-    const handleOnChange = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newLoginData = { ...loginData };
-        newLoginData[field] = value;
-        setLoginData(newLoginData);
+    // Handle Register Form
+    const onSubmit = data => {
+        // if pass not 6 characters
+        if (data.password.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Your Password Should be at least 6 characters!'
+            });
+            return;
+        };
 
-    };
-    // Handle Login Form
-    const handleRegister = e => {
-        e.preventDefault();
-        // Pass doesn't match
-        if (loginData.password !== loginData.password2) {
+        // if both pass not matched
+        if (data.password !== data.password2) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -39,8 +40,9 @@ const Register = () => {
             });
             return
         };
+
         // Call / register new user func
-        registerNewUser(loginData.email, loginData.password, navigate);
+        registerNewUser(data.email, data.password, navigate);
     };
 
     // Display Successfully Register Message
@@ -66,49 +68,43 @@ const Register = () => {
                             {!loading && <Box >
                                 <Typography variant="h5" sx={{ my: 3, fontWeight: 600, fontFamily: 'Lato' }}>Register</Typography>
                                 {/* Login Form */}
-                                <form onSubmit={handleRegister}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
                                         // required
-                                        name="name"
-                                        id="outlined-basic"
                                         label="Your Name"
                                         variant="outlined"
-                                        onChange={handleOnChange}
+                                        {...register("name")}
                                     />
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
                                         // required
-                                        name="email"
                                         type="email"
                                         id="outlined-basic"
                                         label="Email Address"
                                         variant="outlined"
-                                        onChange={handleOnChange}
+                                        {...register("email")}
                                     />
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
                                         // required
-                                        name="password"
                                         id="outlined-basic"
                                         label="Password"
                                         variant="outlined"
                                         type="password"
-                                        onChange={handleOnChange}
+                                        {...register("password")}
                                     />
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
                                         // required
-                                        name="password2"
-                                        id="outlined-basic"
                                         label="Confirm Password"
                                         variant="outlined"
                                         type="password"
-                                        onChange={handleOnChange}
+                                        {...register("password2")}
                                     />
                                     {/* Display Register Error Message */}
                                     {authError && <Alert severity="error" sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}>{authError}</Alert>}

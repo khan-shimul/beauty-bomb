@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Container, Grid, Typography, TextField, CircularProgress, Alert } from '@mui/material';
 import login from '../../../images/login/login2.png';
@@ -10,6 +10,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import useAuth from '../../../hooks/useAuth/useAuth';
 import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 
 
 export const useStyles2 = makeStyles({
@@ -35,25 +36,15 @@ export const useStyles2 = makeStyles({
 });
 
 const Login = () => {
-    const [loginData, setLoginData] = useState({});
+    const { register, handleSubmit } = useForm();
     const { user, loading, loginUser, authError } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Handle Login Info
-    const handleOnChange = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newLoginData = { ...loginData };
-        newLoginData[field] = value;
-        setLoginData(newLoginData);
-
-    };
     // Handle Login Form
-    const handleLogin = e => {
-        e.preventDefault();
+    const onSubmit = data => {
         // Call/register existing user func
-        loginUser(loginData.email, loginData.password, location, navigate);
+        loginUser(data.email, data.password, location, navigate);
     };
 
     // Display Successfully Login Message
@@ -81,28 +72,24 @@ const Login = () => {
                             {!loading && <Box>
                                 <Typography variant="h5" sx={{ my: 3, fontWeight: 600, fontFamily: 'Lato' }}>Login</Typography>
                                 {/* Login Form */}
-                                <form onSubmit={handleLogin}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        name="email"
                                         type="email"
                                         required
-                                        id="outlined-basic"
                                         label="Email Address"
                                         variant="outlined"
-                                        onChange={handleOnChange}
+                                        {...register("email")}
                                     />
                                     <TextField
                                         sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}
                                         className={classes2.textFiled}
-                                        name="password"
                                         required
-                                        id="outlined-basic"
                                         label="Password"
                                         variant="outlined"
                                         type="password"
-                                        onChange={handleOnChange}
+                                        {...register("password")}
                                     />
                                     {/* Display Login Error Message */}
                                     {authError && <Alert severity="error" sx={{ width: { xs: 1, md: '80%' }, mb: 2 }}>{authError}</Alert>}
