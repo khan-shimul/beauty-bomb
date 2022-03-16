@@ -3,6 +3,8 @@ import React from 'react';
 
 const SingleSkinTreatment = ({ skinService }) => {
     const { title, img, price, featureOne, featureTwo, details } = skinService;
+
+
     return (
         <Grid item xs={12} sm={12} md={4}>
             <Box>
@@ -46,11 +48,25 @@ const SingleSkinTreatment = ({ skinService }) => {
                         sx={{
                             fontFamily: 'Lato',
                             fontSize: '0.85rem',
-                            color: '#FFFEFE'
+                            color: '#FFFEFE',
                         }}
                     >
                         {featureTwo}
                     </Typography>
+                    {/* Hidden */}
+                    <Box>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                fontFamily: 'Lato',
+                                fontSize: '0.85rem',
+                                color: '#FFFEFE',
+                                mt: 2
+                            }}
+                        >
+                            {details.slice(0, 120)}
+                        </Typography>
+                    </Box>
                 </Box>
             </Box>
         </Grid>
