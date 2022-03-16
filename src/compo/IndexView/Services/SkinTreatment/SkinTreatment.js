@@ -1,6 +1,8 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import React from 'react';
 import { useServices } from '../../../../hooks/useServices/useServices';
+import SingleSkinTreatment from '../SingleSkinTreatment/SingleSkinTreatment';
+
 
 const SkinTreatment = () => {
     const [services] = useServices();
@@ -10,15 +12,10 @@ const SkinTreatment = () => {
         <Box component="div">
             <Grid container spacing={4}>
                 {
-                    skinServices.map(skinService => <Grid item xs={12} sm={12} md={4} key={skinService._id}>
-                        <Box>
-                            <img
-                                width={'100%'}
-                                src={skinService.img}
-                                alt="skin service" />
-                            <Typography> {skinService.title} </Typography>
-                        </Box>
-                    </Grid>)
+                    skinServices.map(skinService => <SingleSkinTreatment
+                        key={skinService._id}
+                        skinService={skinService}
+                    />)
                 }
             </Grid>
         </Box>
