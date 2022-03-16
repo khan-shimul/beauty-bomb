@@ -31,12 +31,17 @@ const SpaServices = () => {
         setSpaCategory(category);
     };
 
-    // Display Service
-    useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/posts`)
-            .then(res => res.json())
-            .then(data => setServices(data));
-    }, []);
+    // Load services categories wise from db
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/services`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setServices(data)
+    //             const categoriesFiltering = data.filter(singleData => singleData.category === spaCategory);
+    //             setServices(categoriesFiltering);
+    //         });
+    // }, []);
+
 
 
     const classes = useStyles();

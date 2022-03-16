@@ -16,6 +16,7 @@ import 'aos/dist/aos.css';
 import Register from './pages/Login/Register/Register';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
+import SkinTreatment from './compo/IndexView/Services/SkinTreatment/SkinTreatment';
 AOS.init();
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
             <Route path="/" element={<Home />} >
               {/* Nested Routes */}
               <Route path='/' element={<p>skin infof</p>}></Route>
-              <Route path='/skin' element={<p>skin infof</p>}></Route>
+              <Route path='/skin' element={<SkinTreatment />}></Route>
               <Route path='/message' element={<p>message infof</p>}></Route>
               <Route path='/body' element={<p>body infof</p>}></Route>
               <Route path='/aroma' element={<p>aroma infof</p>}></Route>
