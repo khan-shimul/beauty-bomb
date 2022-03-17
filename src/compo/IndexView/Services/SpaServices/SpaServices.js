@@ -61,7 +61,7 @@ const SpaServices = () => {
                     Where nature meets bliss
                 </Typography>
                 {/* NavLinks */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', my: 3.5 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3.5, mb: 5 }}>
                     <NavLink to="/skin"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
                     >

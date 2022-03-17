@@ -27,7 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} >
               {/* Nested Routes */}
-              <Route path='/' element={<p>skin infof</p>}></Route>
+              <Route path='/' element={<SkinTreatment />}></Route>
               <Route path='/skin' element={<SkinTreatment />}></Route>
               <Route path='/message' element={<p>message infof</p>}></Route>
               <Route path='/body' element={<p>body infof</p>}></Route>

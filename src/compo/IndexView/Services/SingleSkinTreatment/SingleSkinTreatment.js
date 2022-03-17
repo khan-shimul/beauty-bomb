@@ -1,22 +1,47 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { makeStyles } from '@mui/styles';
 
 const SingleSkinTreatment = ({ skinService }) => {
     const { title, img, price, featureOne, featureTwo, details } = skinService;
 
+    const useStyles = makeStyles({
+        root: {
+            transition: 'transform 300ms !important',
+            '&:hover': {
+                transform: 'translateY(-15px) !important',
+
+            }
+        },
+        btnDetails: {
+            color: '#FAF5F7 !important',
+            textTransform: 'none !important',
+            border: '1px solid #FAF5F7 !important',
+            transition: '0.5ms',
+            '&:hover': {
+                color: '#DFDADA !important'
+            }
+        }
+    });
+
+    const classes = useStyles();
 
     return (
         <Grid item xs={12} sm={12} md={4}>
-            <Box>
+            <Box
+                component="div"
+                className={classes.root}
+            >
                 {/* Image */}
                 <Box>
                     <img
-                        width={'100%'}
+                        width='100%'
                         src={img}
                         alt="skin service" />
                 </Box>
                 {/* Description Part */}
-                <Box sx={{ background: '#FF508B', px: 2, py: 3, mt: -0.7, zIndex: 1, position: 'relative' }}>
+                <Box sx={{ background: '#FF508B', px: 2, py: 3, mt: -0.8, zIndex: 1, position: 'relative' }}>
                     <Typography
                         variant="h5"
                         sx={{
@@ -24,11 +49,12 @@ const SingleSkinTreatment = ({ skinService }) => {
                             fontFamily: 'Prata',
                             color: '#FFFEFE'
                         }}> {title} </Typography>
+                    {/* Line1 */}
                     <Box
                         sx={{
                             height: '1px',
                             width: '50px',
-                            background: '#FFFEFE',
+                            background: '#EDE6E6',
                             my: 1.5
                         }}
                     ></Box>
@@ -64,8 +90,34 @@ const SingleSkinTreatment = ({ skinService }) => {
                                 mt: 2
                             }}
                         >
-                            {details.slice(0, 120)}
+                            {details.slice(0, 80)}...
                         </Typography>
+                        {/* line2 */}
+                        <Box
+                            sx={{
+                                height: '1px',
+                                maxWidth: '100%',
+                                background: '#EDE6E6',
+                                mt: 2.5,
+                                mb: 2
+                            }}
+                        ></Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    fontFamily: 'Lato',
+                                    fontSize: '1.5rem',
+                                    color: '#FFFEFE',
+                                    fontWeight: 700,
+                                }}
+                            > ${price} </Typography>
+                            <Button
+                                variant="text"
+                                endIcon={<NavigateNextIcon />}
+                                className={classes.btnDetails}
+                            >View Details</Button>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
