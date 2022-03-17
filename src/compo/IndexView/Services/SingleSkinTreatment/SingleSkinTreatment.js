@@ -3,8 +3,8 @@ import React from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { makeStyles } from '@mui/styles';
 
-const SingleSkinTreatment = ({ skinService }) => {
-    const { title, img, price, featureOne, featureTwo, details } = skinService;
+const SingleSkinTreatment = ({ service }) => {
+    const { title, img, price, featureOne, featureTwo, details } = service;
 
     const useStyles = makeStyles({
         root: {

@@ -1,22 +1,22 @@
-import { Box, Grid } from '@mui/material';
 import React from 'react';
+import { Box, Grid } from '@mui/material';
 import { useServices } from '../../../../hooks/useServices/useServices';
-import Loader from '../Loader/Loader';
 import SingleSkinTreatment from '../SingleSkinTreatment/SingleSkinTreatment';
+import Loader from '../Loader/Loader';
 
 
-const SkinTreatment = () => {
+const Massage = () => {
     const [services] = useServices();
-    const skinServices = services.filter(service => service.category === 'skin');
+    const massageServices = services.filter(service => service.category === 'massage');
 
     return (
         <Box component="div">
             {
-                !skinServices.length && <Loader />
+                !massageServices.length && <Loader />
             }
             <Grid container spacing={4}>
                 {
-                    skinServices.map(service => <SingleSkinTreatment
+                    massageServices.map(service => <SingleSkinTreatment
                         key={service._id}
                         service={service}
                     />)
@@ -26,4 +26,4 @@ const SkinTreatment = () => {
     );
 };
 
-export default SkinTreatment;
+export default Massage;

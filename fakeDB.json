@@ -31,7 +31,7 @@
     },
     {
         "id": 4,
-        "category": "message",
+        "category": "massage",
         "title": "Hot Stone Massage",
         "price": 150,
         "featureOne": "55 mins Hot Stone Massage",
@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "category": "message",
+        "category": "massage",
         "title": "Massage Therapy",
         "price": 350,
         "featureOne": "55 mins Hot Stone Massage",
@@ -51,7 +51,7 @@
     },
     {
         "id": 6,
-        "category": "message",
+        "category": "massage",
         "title": "Traditional Vedic Massage",
         "price": 500,
         "featureOne": "55 mins Hot Stone Massage",

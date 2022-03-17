@@ -4,19 +4,18 @@ import { useServices } from '../../../../hooks/useServices/useServices';
 import Loader from '../Loader/Loader';
 import SingleSkinTreatment from '../SingleSkinTreatment/SingleSkinTreatment';
 
-
-const SkinTreatment = () => {
+const Aroma = () => {
     const [services] = useServices();
-    const skinServices = services.filter(service => service.category === 'skin');
+    const aromaServices = services.filter(service => service.category === 'aroma');
 
     return (
         <Box component="div">
             {
-                !skinServices.length && <Loader />
+                !aromaServices.length && <Loader />
             }
             <Grid container spacing={4}>
                 {
-                    skinServices.map(service => <SingleSkinTreatment
+                    aromaServices.map(service => <SingleSkinTreatment
                         key={service._id}
                         service={service}
                     />)
@@ -26,4 +25,4 @@ const SkinTreatment = () => {
     );
 };
 
-export default SkinTreatment;
+export default Aroma;

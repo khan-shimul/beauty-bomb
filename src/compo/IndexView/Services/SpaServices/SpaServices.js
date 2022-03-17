@@ -76,7 +76,7 @@ const SpaServices = () => {
                         <Button
                             className={classes.navItem}
                             onClick={() => handleSpaCategory('message')}
-                        >Message</Button>
+                        >Massage</Button>
                     </NavLink>
                     <NavLink to="/body"
                         className={(navInfo) => ((navInfo.isActive ? classes.activePage : ''))}
