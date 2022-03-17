@@ -20,6 +20,7 @@ import SkinTreatment from './compo/IndexView/Services/SkinTreatment/SkinTreatmen
 import Massage from './compo/IndexView/Services/Massage/Massage';
 import Body from './compo/IndexView/Services/Body/Body';
 import Aroma from './compo/IndexView/Services/Aroma/Aroma';
+import ServiceDetails from './compo/IndexView/Services/ServiceDetails/ServiceDetails';
 AOS.init();
 
 function App() {
@@ -37,10 +38,11 @@ function App() {
               <Route path='/aroma' element={<Aroma />}></Route>
             </Route>
             <Route path="/home" element={<Home />} >
-              <Route path='/home' element={<p>skin infof</p>}></Route>
+              <Route path='/home' element={<SkinTreatment />}></Route>
             </Route>
+            {/* Service Details */}
+            <Route path="/service/:id" element={<PrivateRoute><ServiceDetails /></PrivateRoute>} />
             <Route path="/about" element={<About />} />
-            <Route path="/service" element={<PrivateRoute><Service /></PrivateRoute>} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />

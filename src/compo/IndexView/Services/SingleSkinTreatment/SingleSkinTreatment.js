@@ -2,10 +2,17 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
 
 const SingleSkinTreatment = ({ service }) => {
     const { title, img, price, featureOne, featureTwo, details } = service;
 
+    // Handle Service Details
+    const navigate = useNavigate();
+    const handleServiceDetails = (id) => {
+        navigate(`/service/${id}`);
+    }
+    // Custom Styles
     const useStyles = makeStyles({
         root: {
             transition: 'transform 300ms !important',
@@ -123,6 +130,7 @@ const SingleSkinTreatment = ({ service }) => {
                                 }}
                             > ${price} </Typography>
                             <Button
+                                onClick={() => handleServiceDetails(service._id)}
                                 variant="text"
                                 endIcon={<NavigateNextIcon />}
                                 className={classes.btnDetails}
