@@ -30,6 +30,8 @@ const SingleSkinTreatment = ({ service }) => {
     return (
         <Grid item xs={12} sm={12} md={4}>
             <Box
+                data-aos="zoom-in"
+                data-aos-duration="3000"
                 component="div"
                 className={classes.root}
             >
@@ -41,7 +43,15 @@ const SingleSkinTreatment = ({ service }) => {
                         alt="skin service" />
                 </Box>
                 {/* Description Part */}
-                <Box sx={{ background: '#FF508B', px: 2, py: 3, mt: -0.8, zIndex: 1, position: 'relative' }}>
+                <Box
+                    position="relative"
+                    top="-30px"
+                    sx={{
+                        background: '#FF508B',
+                        px: 2,
+                        py: 3,
+
+                    }}>
                     <Typography
                         variant="h5"
                         sx={{
